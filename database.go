@@ -30,13 +30,13 @@ func connectDB() (*sql.DB, error) {
 
 	rr, err := os.ReadFile("config.yaml")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var config dbParams
 
 	if err := yaml.Unmarshal(rr, &config); err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	conn := fmt.Sprintf("host=%s dbname=%s user=%s password=%s sslmode=%s",

@@ -18,6 +18,11 @@ import (
 func main() {
 	router := mux.NewRouter()
 
+	db, err := connectDB()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	router.HandleFunc("/", handleIndexRequest).Methods("GET", "OPTIONS")
 	router.HandleFunc("/login", handleLoginRequest).Methods("POST", "OPTIONS")
 	router.HandleFunc("/servelogin", handleServeLoginRequest).Methods("GET")
